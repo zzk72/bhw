@@ -1,0 +1,48 @@
+.footer-container {
+    background-color: #02162c;
+    color: #ffffff;
+    padding: 20px 0;
+    z-index: 1500; /* 确保页脚的z-index高于侧边栏 */
+    position: relative; /* 让z-index生效 */
+    Bottom: 0;
+}
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.footer-section h4 {
+    margin-bottom: 15px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-section {
+        margin-bottom: 20px;
+    }
+}

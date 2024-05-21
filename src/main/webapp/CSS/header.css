@@ -1,0 +1,40 @@
+.container-fluid {
+    background-color: #02162c;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* 确保导航栏位于页面其他内容之上 */
+}
+
+.container-fluid ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.container-fluid li form {
+    margin: 0;
+}
+
+nav ul li, nav input[type="submit"] {
+    font-size: larger; /* 调整字体大小 */
+    font-weight: bold; /* 字体加粗 */
+}
+
+nav a, nav input[type="submit"], #connect {
+    text-decoration: none;
+    color: white; /* 修改为白色以符合导航栏背景 */
+    padding: 0.5rem;
+    border: none; /* 移除按钮边框 */
+    background: none; /* 移除按钮默认背景 */
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+nav a:hover, nav input[type="submit"]:hover, #connect:hover {
+    background-color: #e7f1ff;
+}

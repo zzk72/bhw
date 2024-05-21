@@ -1,0 +1,18 @@
+
+
+        .sidebar {
+            width: 300px; /* 侧边栏的宽度 */
+            background-color: #0c625a; /* 浅蓝色背景 */
+            border-radius: 10px; /* 圆角 */
+            padding: 10px; /* 内边距 */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* 可选的阴影效果 */
+
+
+            /*!*width: 100%;*!*/
+            position: fixed;
+            top: 105px; /* 与导航栏的高度保持一致 */
+            height:90%;
+            bottom: 17px;
+            z-index: 1000; /* 确保导航栏位于页面其他内容之上 */
+            overflow-y: auto; /* 如果内容过多，允许滚动 */
+        }
