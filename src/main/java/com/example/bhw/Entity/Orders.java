@@ -1,8 +1,12 @@
 package com.example.bhw.Entity;
+
 import jakarta.persistence.*;
 import lombok.Data;
-@Entity
+
+import java.time.LocalDateTime;
+
 @Data
+@Entity
 @Table(name = "orders")
 public class Orders {
     @Id
@@ -20,4 +24,7 @@ public class Orders {
 
     @Column(name = "status")
     private String status;
+
+    @Column(name = "reservation_time")
+    private LocalDateTime reservationTime; // 预约时间
 }

@@ -1,6 +1,7 @@
 package com.example.bhw.Servlet;
 
 import com.example.bhw.Bean.UserVerificationBean;
+import com.example.bhw.Entity.User;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,19 +25,20 @@ public class LoginServlet extends HttpServlet {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
-        if (!userVerificationBean.verifyIdentidy(username, password)) {
+        User user=userVerificationBean.verifyIdentidy(username, password);
+        if ((user==null)) {
             request.setAttribute("info", "Sorry! Password not inValid!");
             request.getRequestDispatcher("message.jsp").forward(request, response);
             return;
         }
         HttpSession session = request.getSession();
+        session.setAttribute("user", user);
         session.setAttribute("username", username);
         session.setAttribute("info", "Login Successful!");
         session.setAttribute("isFavoritePage", false);
         //获取用户的收藏列表
         // 跳转/que ,使用get请求
-        response.sendRedirect("home");
+        response.sendRedirect("viewpoints");
     }
 
 }

@@ -91,18 +91,21 @@ public class UserVerificationBean {
      * @param password
      * @return true:密码正确 false:密码错误
      */
-    public boolean verifyIdentidy(String username, String password) {
-       if(username == null || username.isEmpty() || password == null || password.isEmpty()) {
-           return false;
-       }
-       if(!checkPasswordFormat(password)) {
-           return false;
-       }
-       User user = userDao.getUser(username);
-         if(user == null) {
-              return false;
-         }
-            return verifyPassword(password, user.getPassword());
+    public User verifyIdentidy(String username, String password) {
+        if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
+            return null;
+        }
+        if (!checkPasswordFormat(password)) {
+            return null;
+        }
+        User user = userDao.getUserByName(username);
+        if (user == null) {
+            return null;
+        }
+        if (verifyPassword(password, user.getPassword())) {
+            return user;
+        }
+        return null;
     }
 
     /**

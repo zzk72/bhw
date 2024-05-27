@@ -13,7 +13,10 @@ public class UserDao {
     @PersistenceContext
     private EntityManager em;
 
-    public User getUser(String username) {
+    public User getUserById(int id) {
+        return em.find(User.class, id);
+    }
+    public User getUserByName(String username) {
         return em.createQuery("select u from User u where u.username = :username", User.class)
                 .setParameter("username", username)
                 .getSingleResult();

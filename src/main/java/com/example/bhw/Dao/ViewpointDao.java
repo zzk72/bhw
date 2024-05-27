@@ -15,7 +15,7 @@ public class ViewpointDao {
     public void insertViewpoint(Viewpoint viewpoint) {
         em.persist(viewpoint);
     }
-    public List<Viewpoint> getViewpoints() {
+    public List<Viewpoint> findAll() {
         return em.createQuery("select v from Viewpoint v", Viewpoint.class)
                 .getResultList();
     }

@@ -6,7 +6,7 @@ import jakarta.persistence.PersistenceContext;
 import java.util.List;
 
 @Stateless
-public class OrderDao {
+public class OrdersDao {
     @PersistenceContext
     private EntityManager em;
 
