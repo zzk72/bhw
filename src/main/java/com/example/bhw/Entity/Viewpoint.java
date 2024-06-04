@@ -24,4 +24,7 @@ public class Viewpoint {
     private String video;
     @OneToMany(mappedBy = "user")
     private List<Orders> orders;
+
+    @Transient
+    private long queueStatus;
 }

@@ -1,4 +1,5 @@
 package com.example.bhw.Dao;
+
 import com.example.bhw.Entity.Orders;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -15,8 +16,7 @@ public class OrdersDao {
     }
 
     public List<Orders> getOrders() {
-        return em.createQuery("select o from Orders o", Orders.class)
-                .getResultList();
+        return em.createQuery("select o from Orders o", Orders.class).getResultList();
     }
 
     public Orders getOrder(int id) {
@@ -25,4 +25,9 @@ public class OrdersDao {
                 .getSingleResult();
     }
 
+    public long getUncheckinOrdersCountByViewpointId(int viewpointId) {
+        return em.createQuery("SELECT COUNT(o) FROM Orders o WHERE o.viewpoint.id = :viewpointId AND o.status <> 'checked_in'", Long.class)
+                .setParameter("viewpointId", viewpointId)
+                .getSingleResult();
+    }
 }

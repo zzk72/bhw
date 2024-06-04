@@ -19,6 +19,9 @@ public class ViewpointDao {
         return em.createQuery("select v from Viewpoint v", Viewpoint.class)
                 .getResultList();
     }
+    public List<Viewpoint> getAllViewpoints() {
+        return em.createQuery("SELECT v FROM Viewpoint v", Viewpoint.class).getResultList();
+    }
     public Viewpoint getViewpoint(int id) {
         return em.createQuery("select v from Viewpoint v where v.id = :id", Viewpoint.class)
                 .setParameter("id", id)

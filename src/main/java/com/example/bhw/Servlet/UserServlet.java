@@ -1,8 +1,13 @@
 package com.example.bhw.Servlet;
 import com.example.bhw.Dao.UserDao;
+
+import com.example.bhw.Bean.QueueStatusBean;
 import com.example.bhw.Bean.UserManageBean;
 import com.example.bhw.Bean.EmailServiceBean;
+
+
 import com.example.bhw.Entity.User;
+import com.example.bhw.Entity.Viewpoint;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,6 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/user")
 public class UserServlet extends HttpServlet {
@@ -24,6 +30,9 @@ public class UserServlet extends HttpServlet {
 
     @Inject
     private UserDao userDao;
+
+    @Inject
+    private QueueStatusBean queueStatusBean;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -84,7 +93,7 @@ public class UserServlet extends HttpServlet {
         session.setAttribute("username", username);
         session.setAttribute("info", "Login Successful!");
         session.setAttribute("isFavoritePage", false);
-        response.sendRedirect("viewpoints");
+        response.sendRedirect("viewpoints?action=showHome");
     }
 
     private void handleSendCode(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -130,4 +139,5 @@ public class UserServlet extends HttpServlet {
             request.getRequestDispatcher("message.jsp").forward(request, response);
         }
     }
+
 }
