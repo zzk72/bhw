@@ -91,6 +91,14 @@
                             </div>
                         </article>
                     </c:forEach>
+                    <h2 class="dark-text">Viewpoint Reviews</h2>
+                    <c:forEach items="${reviews}" var="review">
+                        <article class="service-item">
+                            <div class="service-info">
+                                <p>comment: ${review}</p>
+                            </div>
+                        </article>
+                    </c:forEach>
                 </div>
             </section>
         </div>

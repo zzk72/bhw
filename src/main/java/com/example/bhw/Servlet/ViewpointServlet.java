@@ -68,7 +68,7 @@ public class ViewpointServlet extends HttpServlet {
         String temperature = handleWebServiceBean.handleViewTemperature("2021-06-01",viewpointId);
         request.setAttribute("temperature", temperature);
 
-        request.getRequestDispatcher("/services.jsp").forward(request, response);
+        request.getRequestDispatcher("/detailInfo.jsp").forward(request, response);
     }
 
 

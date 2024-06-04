@@ -4,6 +4,7 @@ package com.example.bhw.Bean;
 
 
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -36,15 +37,29 @@ public class HandleWebServiceBean {
         return temperature;
     }
 
+//    public List<String> handleViewReviews(int viewpointId) throws IOException {
+//        List<String> commentList = new ArrayList<>();
+//        String reviews = getWebServiceData("http://localhost:8080/bhw-1.0-SNAPSHOT/api/reviews/viewpoint?viewpointId=" + viewpointId);
+//        JSONObject jsonObject = new JSONObject(reviews);
+//        List<Object> reviewsList = jsonObject.getJSONArray("reviews").toList();
+//        for (Object review : reviewsList) {
+//            Map<String, String> reviewMap = (Map<String, String>) review;
+//            commentList.add(reviewMap.get("comment"));
+//        }
+//        return commentList;
+//    }
     public List<String> handleViewReviews(int viewpointId) throws IOException {
         List<String> commentList = new ArrayList<>();
         String reviews = getWebServiceData("http://localhost:8080/bhw-1.0-SNAPSHOT/api/reviews/viewpoint?viewpointId=" + viewpointId);
         JSONObject jsonObject = new JSONObject(reviews);
-        List<Object> reviewsList = jsonObject.getJSONArray("reviews").toList();
-        for (Object review : reviewsList) {
-            Map<String, String> reviewMap = (Map<String, String>) review;
-            commentList.add(reviewMap.get("comment"));
+        JSONArray reviewsArray = jsonObject.getJSONArray("reviews");
+
+        for (int i = 0; i < reviewsArray.length(); i++) {
+            JSONObject reviewObject = reviewsArray.getJSONObject(i);
+            String comment = reviewObject.getString("comment");
+            commentList.add(comment);
         }
+
         return commentList;
     }
     private String getWebServiceData(String urlString) throws IOException {
