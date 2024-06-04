@@ -20,17 +20,11 @@
       </form>
     </li>
     <li>
-      <form id="queueStatusForm" action="viewpoints" method="get">
-        <input type="hidden" name="action" value="viewQueueStatus" />
-        <input type="submit" value="排队情况" />
-      </form>
-    </li>
-    <li><a href="https://github.com/zzk72" role="button" id="connect">联系我们</a></li>
-    <li>
       <form id="ServiceStatusForm" action="viewpoints" method="get">
         <input type="hidden" name="action" value="viewServices" />
         <input type="submit" value="服务" />
       </form>
     </li>
+    <li><a href="https://github.com/zzk72" role="button" id="connect">联系我们</a></li>
   </ul>
 </nav>

@@ -65,8 +65,18 @@
     <main class="main-content">
         <div class="grid">
             <section>
-                <h2 class="dark-text">景区服务信息</h2>
+
+                <h2 class="dark-text">景区信息</h2>
                 <div class="service-list">
+                    <article class="viewpoint-item">
+                        <img src="${viewpoint.image}" alt="${viewpoint.name}" class="viewpoint-image">
+                        <div class="viewpoint-info">
+                            <h3>${viewpoint.name}</h3>
+                            <p>${viewpoint.text}</p>
+                            <p>排队情况: ${viewpoint.queueStatus} 人</p>
+                        </div>
+                    </article>
+                    <h2 class="dark-text">景区服务站信息</h2>
                     <c:forEach items="${services}" var="service">
                         <article class="service-item">
                             <div class="service-info">

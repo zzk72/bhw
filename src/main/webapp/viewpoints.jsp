@@ -111,8 +111,13 @@
                                     <input type="hidden" name="userId" value="${sessionScope.user.id}">
                                     <button type="submit" style="margin-top: 10px;">预约</button>
                                 </form>
+                                <form action="viewpoints" method="get">
+                                    <input type="hidden" name="action" value="viewServices" />
+                                    <input type="hidden" name="viewpointId" value="${viewpoint.id}" />
+                                    <input type="submit" value="查看服务信息" />
+                                </form>
                             </div>
-                            <img src="${viewpoint.image}" alt="${viewpoint.name}" class="viewpoint-image">
+
                         </article>
                     </c:forEach>
                 </div>

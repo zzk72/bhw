@@ -29,7 +29,7 @@ public class ReservationServlet extends HttpServlet {
         LocalDateTime reservationTime = LocalDateTime.parse(req.getParameter("reservationTime"));
 
         User user = (User) req.getSession().getAttribute("user");
-        Viewpoint viewpoint = viewpointDao.getViewpoint(viewpointId);
+        Viewpoint viewpoint = viewpointDao.getViewpointById(viewpointId);
 
         reservationBean.reserveViewpoint(user, viewpoint, reservationTime);
 
