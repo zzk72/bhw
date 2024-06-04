@@ -135,6 +135,8 @@
       <div class="button-group">
         <button type="submit" class="login">Login</button>
         <button type="button" class="register" onclick="window.location.href='register.jsp';">Register</button>
+        <button type="button" class="change-password" onclick="window.location.href='changePassword.jsp';">Forgot Password</button>
+
       </div>
     </form>
   </div>

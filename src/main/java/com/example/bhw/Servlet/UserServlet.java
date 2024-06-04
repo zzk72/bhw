@@ -1,6 +1,7 @@
 package com.example.bhw.Servlet;
-
-import com.example.bhw.Bean.UserVerificationBean;
+import com.example.bhw.Dao.UserDao;
+import com.example.bhw.Bean.UserManageBean;
+import com.example.bhw.Bean.EmailServiceBean;
 import com.example.bhw.Entity.User;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
@@ -16,8 +17,13 @@ import java.io.IOException;
 public class UserServlet extends HttpServlet {
 
     @Inject
-    UserVerificationBean userVerificationBean;
+    UserManageBean userManageBean;
 
+    @Inject
+    EmailServiceBean emailServiceBean;
+
+    @Inject
+    private UserDao userDao;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -34,6 +40,10 @@ public class UserServlet extends HttpServlet {
         String action = request.getParameter("action");
         if ("register".equals(action)) {
             handleRegister(request, response);
+        } else if ("sendCode".equals(action)) {
+            handleSendCode(request, response);
+        } else if ("changePassword".equals(action)) {
+            handleChangePassword(request, response);
         } else {
             request.setAttribute("info", "Invalid action.");
             request.getRequestDispatcher("message.jsp").forward(request, response);
@@ -49,11 +59,11 @@ public class UserServlet extends HttpServlet {
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
-        String info = userVerificationBean.RegisterUser(user, repassword);
+        String info = userManageBean.RegisterUser(user, repassword);
         HttpSession session = request.getSession();
         session.setAttribute("info", info);
 
-        if (info.equals(UserVerificationBean.SUCCESS)) {
+        if (info.equals(UserManageBean.SUCCESS)) {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("message.jsp").forward(request, response);
@@ -63,9 +73,9 @@ public class UserServlet extends HttpServlet {
     private void handleLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        User user = userVerificationBean.verifyIdentidy(username, password);
+        User user = userManageBean.verifyIdentidy(username, password);
         if (user == null) {
-            request.setAttribute("info", "Sorry! Password not inValid!");
+            request.setAttribute("info", "Sorry! Password not valid!");
             request.getRequestDispatcher("message.jsp").forward(request, response);
             return;
         }
@@ -75,5 +85,49 @@ public class UserServlet extends HttpServlet {
         session.setAttribute("info", "Login Successful!");
         session.setAttribute("isFavoritePage", false);
         response.sendRedirect("viewpoints");
+    }
+
+    private void handleSendCode(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
+        User user = userDao.getUserByName(username);
+        if (user != null) {
+            String email = user.getEmail();
+            String code = emailServiceBean.generateVerificationCode();
+            emailServiceBean.sendEmail(email, "Verification Code", "Your verification code is: " + code);
+            HttpSession session = request.getSession();
+            session.setAttribute("username", username);
+            session.setAttribute("verificationCode", code);
+            session.setAttribute("email", email);
+            session.setAttribute("info", "Verification code sent to your email.");
+            request.getRequestDispatcher("changePassword.jsp").forward(request, response);
+        } else {
+            request.getSession().setAttribute("info", "User not found.");
+            response.sendRedirect("changePassword.jsp");
+        }
+    }
+
+    private void handleChangePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String email = request.getParameter("email");
+        String code = request.getParameter("code");
+        String newPassword = request.getParameter("newPassword");
+
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+        String sessionCode = (String) session.getAttribute("verificationCode");
+        String sessionEmail = (String) session.getAttribute("email");
+
+        if (sessionCode != null && sessionCode.equals(code) && sessionEmail != null && sessionEmail.equals(email)) {
+            boolean isChanged = userManageBean.changePassword(username, newPassword);
+            if (isChanged) {
+                session.setAttribute("info", "Password changed successfully.");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            } else {
+                session.setAttribute("info", "Failed to change password.");
+                request.getRequestDispatcher("message.jsp").forward(request, response);
+            }
+        } else {
+            session.setAttribute("info", "Invalid verification code or email.");
+            request.getRequestDispatcher("message.jsp").forward(request, response);
+        }
     }
 }

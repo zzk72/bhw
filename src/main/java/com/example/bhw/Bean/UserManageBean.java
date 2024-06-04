@@ -11,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 @Stateless
-public class UserVerificationBean {
+public class UserManageBean {
     public final static String SUCCESS = "success!";
 
     @Inject
@@ -141,4 +141,22 @@ public class UserVerificationBean {
 
         return info;
     }
+
+    public boolean changePassword(String name, String newPassword) {
+        if (name == null || name.isEmpty() || newPassword == null || newPassword.isEmpty()) {
+            return false;
+        }
+        if (!checkPasswordFormat(newPassword)) {
+            return false;
+        }
+        User user = userDao.getUserByName(name);
+        if (user == null) {
+            return false;
+        }
+        user.setPassword(encryptPassword(newPassword));
+        userDao.updateUser(user);
+        return true;
+    }
+
+
 }

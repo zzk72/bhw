@@ -19,6 +19,8 @@
     </style>
 </head>
 <body>
+<h1>message</h1>
+<h2>info</h2>
 <%
     String info = (String)request.getAttribute("info");
     if (info != null) {

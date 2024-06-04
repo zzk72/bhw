@@ -42,4 +42,8 @@ public class UserDao {
                 .setParameter("userId", userId)
                 .getResultList();
     }
+
+    public void updateUser(User user) {
+        em.merge(user);
+    }
 }
