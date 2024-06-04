@@ -1,5 +1,6 @@
 package com.example.bhw.Servlet;
 
+import com.example.bhw.Bean.HandleWebServiceBean;
 import com.example.bhw.Bean.QueueStatusBean;
 import com.example.bhw.Dao.ViewpointDao;
 import com.example.bhw.Entity.Service;
@@ -12,7 +13,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
+import java.util.Scanner;
 
 @WebServlet("/viewpoints")
 public class ViewpointServlet extends HttpServlet {
@@ -22,6 +26,8 @@ public class ViewpointServlet extends HttpServlet {
 
     @Inject
     private ViewpointDao viewpointDao;
+    @Inject
+    HandleWebServiceBean handleWebServiceBean;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -33,6 +39,7 @@ public class ViewpointServlet extends HttpServlet {
         } else if ("viewServices".equals(action)) {
             handleViewServices(req, resp);
         }
+
     }
 
 
@@ -44,6 +51,25 @@ public class ViewpointServlet extends HttpServlet {
         request.setAttribute("viewpoint", viewpoint);
         List<Service> services = queueStatusBean.getServicesByViewpointId(viewpointId);
         request.setAttribute("services", services);
+
+        //通过RESTFul服务获取第三方评价信息
+        List<String> reviews = handleWebServiceBean.handleViewReviews(viewpointId);
+        request.setAttribute("reviews", reviews);
+
+        //通过RESTFul服务获取天气信息
+        String weatherInfo = handleWebServiceBean.handleViewWeather("2021-06-01",viewpointId);
+        request.setAttribute("weatherInfo", weatherInfo);
+
+        //通过RESTFul服务获取空气质量信息
+        String airInfo = handleWebServiceBean.handleViewAir("2021-06-01",viewpointId);
+        request.setAttribute("airQuality", airInfo);
+
+        //通过RESTFul服务获取温度信息
+        String temperature = handleWebServiceBean.handleViewTemperature("2021-06-01",viewpointId);
+        request.setAttribute("temperature", temperature);
+
         request.getRequestDispatcher("/services.jsp").forward(request, response);
     }
+
+
 }

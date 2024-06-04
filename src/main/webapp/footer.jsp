@@ -34,7 +34,7 @@
     </section>
   </div>
   <div class="footer-bottom">
-    <small>&copy; 2024 MP3播放器. All rights reserved.</small>
+    <small>&copy; 2024 景区服务平台. All rights reserved.</small>
     <small>Designed by <a href="https://github.com/zzk72">张珍奎</a></small>
   </div>
 </footer>

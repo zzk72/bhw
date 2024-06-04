@@ -105,20 +105,18 @@
                                     <video src="${viewpoint.video}" controls></video>
                                 </div>
                                 <form action="reserve" method="post" style="margin-top: 10px;">
-                                    <%--@declare id="reservationtime"--%><input type="hidden" name="viewpointId" value="${viewpoint.id}">
+                                        <%--@declare id="reservationtime"--%><input type="hidden" name="viewpointId" value="${viewpoint.id}">
                                     <label for="reservationTime">预约时间：</label>
                                     <input type="datetime-local" name="reservationTime" required>
                                     <input type="hidden" name="userId" value="${sessionScope.user.id}">
-                                    <button type="submit" style="margin-top: 10px;">预约</button>
-                                </form>
-                                <form action="viewpoints" method="get">
-                                    <input type="hidden" name="action" value="viewServices" />
-                                    <input type="hidden" name="viewpointId" value="${viewpoint.id}" />
-                                    <input type="submit" value="查看服务信息" />
+                                    <div class="button-container" style="margin-top: 10px; display: flex; gap: 10px;">
+                                        <button type="submit" style="margin: 0;">预约</button>
+                                        <button type="button" onclick="location.href='viewpoints?action=viewServices&viewpointId=${viewpoint.id}'" style="margin: 0;">查看详情</button>
+                                    </div>
                                 </form>
                             </div>
-
                         </article>
+
                     </c:forEach>
                 </div>
             </section>
