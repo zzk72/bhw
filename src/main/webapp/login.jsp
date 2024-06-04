@@ -118,7 +118,8 @@
     <h1 id="login-title">Login</h1>
     <!-- 创造间隔 -->
     <div style="height: 30px;"></div>
-    <form action="login" method="get"> <!-- 提交表单到login ，相当于跳转/login -->
+    <form action="user" method="get"> <!-- 提交表单到login ，相当于跳转/login -->
+      <input type="hidden" name="action" value="login">
       <div class="form-group">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>

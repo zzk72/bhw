@@ -102,7 +102,7 @@
     <h1>Register Page</h1>
     <!-- 创造间隔 -->
     <div style="height: 50px;"></div>
-    <form action="register" method="post" >
+    <form action="user" method="post" >
         <table class="form-table">
             <!--用户名行-->
             <tr>
@@ -157,6 +157,8 @@
                     <input type="reset" value="Reset">
                 </td>
             </tr>
+            <!--设置action参数-->
+            <input type="hidden" name="action" value="register">
         </table>
     </form>
 </div>
