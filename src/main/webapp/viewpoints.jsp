@@ -103,7 +103,8 @@
                                 <h3>${viewpoint.name}</h3>
                                 <p>${viewpoint.text}</p>
                                 <div class="video-container" style="margin-top: 10px;">
-                                    <video src="${viewpoint.video}" controls></video>
+<%--                                    <video src="${viewpoint.video}" controls></video>--%>
+                                    <iframe src="${viewpoint.video}" width="800" height="400" title="zzk video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                 </div>
                                 <form action="reserve" method="post" style="margin-top: 10px;">
                                         <%--@declare id="reservationtime"--%><input type="hidden" name="viewpointId" value="${viewpoint.id}">
