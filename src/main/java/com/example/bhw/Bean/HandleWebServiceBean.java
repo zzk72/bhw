@@ -16,14 +16,16 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class HandleWebServiceBean {
+    String port = "8081";
+    String prefix = "http://localhost:" + port + "/wild_restful-1.0-SNAPSHOT/api/";
     public String handleViewWeather(String date,int viewpointId) throws IOException {
-        String weatherInfo = getWebServiceData("http://localhost:8080/bhw-1.0-SNAPSHOT/api/weather/forecast?date=" + date + "&viewpointId=" + viewpointId);
+        String weatherInfo = getWebServiceData(prefix + "weather/forecast?date=" + date + "&viewpointId=" + viewpointId);
         JSONObject jsonObject = new JSONObject(weatherInfo);
         String weather = (String) jsonObject.get("weather");
         return weather;
     }
     public String handleViewAir(String date,int viewpointId) throws IOException {
-        String airInfo = getWebServiceData("http://localhost:8080/bhw-1.0-SNAPSHOT/api/weather/air?date=" + date + "&viewpointId=" + viewpointId);
+        String airInfo = getWebServiceData(prefix+"weather/air?date=" + date + "&viewpointId=" + viewpointId);
         JSONObject jsonObject = new JSONObject(airInfo);
         String airQuality = (String) jsonObject.get("airQuality");
         return airQuality;
@@ -31,7 +33,7 @@ public class HandleWebServiceBean {
 
 
     public String handleViewTemperature(String date,int viewpointId) throws IOException {
-        String weatherInfo = getWebServiceData("http://localhost:8080/bhw-1.0-SNAPSHOT/api/weather/temperature?date=" + date + "&viewpointId=" + viewpointId);
+        String weatherInfo = getWebServiceData(prefix+"weather/temperature?date=" + date + "&viewpointId=" + viewpointId);
         JSONObject jsonObject = new JSONObject(weatherInfo);
         String temperature = (String) jsonObject.get("temperature");
         return temperature;
@@ -50,7 +52,7 @@ public class HandleWebServiceBean {
 //    }
     public List<String> handleViewReviews(int viewpointId) throws IOException {
         List<String> commentList = new ArrayList<>();
-        String reviews = getWebServiceData("http://localhost:8080/bhw-1.0-SNAPSHOT/api/reviews/viewpoint?viewpointId=" + viewpointId);
+        String reviews = getWebServiceData(prefix+"reviews/viewpoint?viewpointId=" + viewpointId);
         JSONObject jsonObject = new JSONObject(reviews);
         JSONArray reviewsArray = jsonObject.getJSONArray("reviews");
 
