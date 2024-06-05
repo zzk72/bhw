@@ -21,7 +21,7 @@ public class ReservationBean {
         order.setUser(user);
         order.setViewpoint(viewpoint);
         order.setReservationTime(reservationTime);
-        order.setStatus("Pending");
+        order.setStatus("unchecked");
 
         ordersDao.insertOrder(order);
     }

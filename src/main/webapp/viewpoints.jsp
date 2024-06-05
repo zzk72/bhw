@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <style>
+        /*https://zzk-host-1319605683.cos.ap-beijing.myqcloud.com/1305448.jpg*/
         body {
             background-color: #f0f0f0;
             color: #141313;
