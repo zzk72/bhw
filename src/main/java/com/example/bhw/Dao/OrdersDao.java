@@ -38,12 +38,17 @@ public class OrdersDao {
         order.setStatus("checked");
         em.merge(order);
     }
+    public List<Orders> getOrdersByUserId(int userId) {
+        return em.createQuery("select o from Orders o where o.user.id = :userId", Orders.class)
+                .setParameter("userId", userId)
+                .getResultList();
+    }
 
-    public Orders getEarliestOrderAfterCurrentTime(int userId, String viewpointId, LocalDateTime currentTime) {
-        Orders order = em.createQuery("select o from Orders o where o.user.id = :userId and o.viewpoint.id = :viewpointId and o.reservationTime > :currentTime and o.status = 'unchecked' order by o.reservationTime", Orders.class)
+    public Orders getEarliestOrderAfterCurrentTime(int userId, int viewpointId, LocalDateTime currentTime) {
+        Orders order = em.createQuery("select o from Orders o where o.user.id = :userId and o.viewpoint.id = :viewpointId  and o.status = 'unchecked' order by o.reservationTime", Orders.class)
                 .setParameter("userId", userId)
                 .setParameter("viewpointId", viewpointId)
-                .setParameter("currentTime", currentTime)
+//                .setParameter("currentTime", currentTime)
                 .setMaxResults(1)
                 .getSingleResult();
         return order;

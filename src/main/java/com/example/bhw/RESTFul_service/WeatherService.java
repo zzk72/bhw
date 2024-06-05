@@ -22,30 +22,30 @@ public class WeatherService {
         result.put("weather", weatherConditions[index]);
         return Response.ok(result).encoding("UTF-8").build();
     }
-
-    @GET
-    @Path("/air")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getAirQuality(@QueryParam("date") String date, @QueryParam("viewpointId") int viewpointId) {
-        // Simulate air quality information
-        String[] airQuality = {"Excellent", "Good", "Light Pollution", "Moderate Pollution", "Heavy Pollution", "Severe Pollution"};
-        int index = (int) (Math.random() * airQuality.length);
-        Map<String, String> result = new HashMap<>();
-        result.put("date", date);
-        result.put("viewpointId", String.valueOf(viewpointId));
-        result.put("airQuality", airQuality[index]);
-        return Response.ok(result).encoding("UTF-8").build();
-    }
-
-    @GET
-    @Path("/temperature")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getTemperature(@QueryParam("date") String date, @QueryParam("viewpointId") int viewpointId) {
-        // Simulate temperature information
-        Map<String, String> result = new HashMap<>();
-        result.put("date", date);
-        result.put("viewpointId", String.valueOf(viewpointId));
-        result.put("temperature", String.valueOf((15 + (int)(Math.random() * 15))));
-        return Response.ok(result).encoding("UTF-8").build();
-    }
+//
+//    @GET
+//    @Path("/air")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response getAirQuality(@QueryParam("date") String date, @QueryParam("viewpointId") int viewpointId) {
+//        // Simulate air quality information
+//        String[] airQuality = {"Excellent", "Good", "Light Pollution", "Moderate Pollution", "Heavy Pollution", "Severe Pollution"};
+//        int index = (int) (Math.random() * airQuality.length);
+//        Map<String, String> result = new HashMap<>();
+//        result.put("date", date);
+//        result.put("viewpointId", String.valueOf(viewpointId));
+//        result.put("airQuality", airQuality[index]);
+//        return Response.ok(result).encoding("UTF-8").build();
+//    }
+//
+//    @GET
+//    @Path("/temperature")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response getTemperature(@QueryParam("date") String date, @QueryParam("viewpointId") int viewpointId) {
+//        // Simulate temperature information
+//        Map<String, String> result = new HashMap<>();
+//        result.put("date", date);
+//        result.put("viewpointId", String.valueOf(viewpointId));
+//        result.put("temperature", String.valueOf((15 + (int)(Math.random() * 15))));
+//        return Response.ok(result).encoding("UTF-8").build();
+//    }
 }

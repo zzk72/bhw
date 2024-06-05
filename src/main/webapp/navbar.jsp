@@ -22,9 +22,14 @@
     <li>
       <form id="ServiceStatusForm" action="viewpoints" method="get">
         <input type="hidden" name="action" value="viewServices" />
-        <input type="submit" value="服务" />
+        <input type="submit" value="详情" />
       </form>
     </li>
-    <li><a href="https://github.com/zzk72" role="button" id="connect">联系我们</a></li>
+    <li>
+      <form id="orders" action="showOrders" method="get">
+        <input type="hidden" name="action" value="showOrders" />
+        <input type="submit" value="Orders" />
+      </form>
+    </li>
   </ul>
 </nav>
