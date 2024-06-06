@@ -13,21 +13,16 @@ import java.util.List;
 public class QueueStatusBean {
     @Inject
     private ViewpointDao viewpointDao;
-
     @Inject
     private OrdersDao ordersDao;
-
     @Inject
     private ServiceDao serviceDao;
-
     public List<Viewpoint> getViewpoints() {
         return viewpointDao.getAllViewpoints();
     }
-
     public List<Service> getServicesByViewpointId(int viewpointId) {
         return serviceDao.getServicesByViewpointId(viewpointId);
     }
-
     public long getQueueStatus(Viewpoint viewpoint) {
         return ordersDao.getUncheckinOrdersCountByViewpointId(viewpoint.getId());
     }

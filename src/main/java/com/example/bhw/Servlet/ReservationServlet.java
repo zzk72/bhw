@@ -16,13 +16,10 @@ import java.time.LocalDateTime;
 
 @WebServlet("/reserve")
 public class ReservationServlet extends HttpServlet {
-
     @Inject
     private ReservationBean reservationBean;
-
     @Inject
     private ViewpointDao viewpointDao;
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int viewpointId = Integer.parseInt(req.getParameter("viewpointId"));
