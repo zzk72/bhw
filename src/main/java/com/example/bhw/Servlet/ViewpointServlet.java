@@ -54,19 +54,27 @@ public class ViewpointServlet extends HttpServlet {
 
         //通过RESTFul服务获取第三方评价信息
         List<String> reviews = handleWebServiceBean.handleViewReviews(viewpointId);
-        request.setAttribute("reviews", reviews);
+        if (reviews != null) {
+            request.setAttribute("reviews", reviews);
+        }
 
         //通过RESTFul服务获取天气信息
         String weatherInfo = handleWebServiceBean.handleViewWeather("2021-06-01",viewpointId);
-        request.setAttribute("weatherInfo", weatherInfo);
+        if(weatherInfo != null){
+            request.setAttribute("weatherInfo", weatherInfo);
+        }
 
         //通过RESTFul服务获取空气质量信息
         String airInfo = handleWebServiceBean.handleViewAir("2021-06-01",viewpointId);
-        request.setAttribute("airQuality", airInfo);
+        if(airInfo != null){
+            request.setAttribute("airQuality", airInfo);
+        }
 
         //通过RESTFul服务获取温度信息
         String temperature = handleWebServiceBean.handleViewTemperature("2021-06-01",viewpointId);
-        request.setAttribute("temperature", temperature);
+        if(temperature != null){
+            request.setAttribute("temperature", temperature);
+        }
 
         request.getRequestDispatcher("/detailInfo.jsp").forward(request, response);
     }

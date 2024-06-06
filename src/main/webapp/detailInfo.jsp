@@ -79,26 +79,36 @@
                             <p>Weather: ${weatherInfo} Temperature: ${temperature}℃</p>
                         </div>
                     </article>
-
                     <h2 class="dark-text">Viewpoint Service Stations</h2>
+                    <c:if test="${empty services}">
+                        <p>No service stations available</p>
+                    </c:if>
+                    <!--如果有service，就显示service-->
+                    <c:if test="${not empty services}">
+                        <c:forEach items="${services}" var="service">
+                            <article class="service-item">
+                                <div class="service-info">
+                                    <h4>${service.name}</h4>
+                                    <p>${service.description}</p>
+                                    <p>Type: ${service.type}</p>
+                                </div>
+                            </article>
+                        </c:forEach>
+                    </c:if>
 
-                    <c:forEach items="${services}" var="service">
-                        <article class="service-item">
-                            <div class="service-info">
-                                <h4>${service.name}</h4>
-                                <p>${service.description}</p>
-                                <p>Type: ${service.type}</p>
-                            </div>
-                        </article>
-                    </c:forEach>
                     <h2 class="dark-text">Viewpoint Reviews</h2>
-                    <c:forEach items="${reviews}" var="review">
-                        <article class="service-item">
-                            <div class="service-info">
-                                <p>comment: ${review}</p>
-                            </div>
-                        </article>
-                    </c:forEach>
+                    <c:if test="${empty reviews}">
+                        <p>No reviews available</p>
+                    </c:if>
+                    <c:if test="${not empty reviews}">
+                        <c:forEach items="${reviews}" var="review">
+                            <article class="service-item">
+                                <div class="service-info">
+                                    <p>comment: ${review}</p>
+                                </div>
+                            </article>
+                        </c:forEach>
+                    </c:if>
                 </div>
             </section>
         </div>
